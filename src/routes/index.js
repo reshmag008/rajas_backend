@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const s3Service = require('../services/s3Service');
 const router = express.Router();
 const path = require('path');
-const googleApisService = require('../services/googleApis')
+// const googleApisService = require('../services/googleApis')
 
 const multer = require("multer");
 // const gcsUpload = multer({ storage: multer.memoryStorage() });
@@ -218,18 +218,18 @@ router.get('/update_unsold', (req, res) => {
 });
 
 
-router.post('/google-upload-file',imageUpload.single('image'),(req, res) => {
-    googleApisService.uploadFile(req.body,req.file)
-    .then((result) => res.status(200).json(result))
-    .catch((err) => res.status(500).json(err))
-});
+// router.post('/google-upload-file',imageUpload.single('image'),(req, res) => {
+//     googleApisService.uploadFile(req.body,req.file)
+//     .then((result) => res.status(200).json(result))
+//     .catch((err) => res.status(500).json(err))
+// });
 
-router.get('/preview-file/:fileId',(req, res) => {
-    console.log("req.params= ", req.params)
-    googleApisService.previewFile(req.params.fileId)
-    .then((result) => res.status(200).json(result))
-    .catch((err) => res.status(500).json(err))
-});
+// router.get('/preview-file/:fileId',(req, res) => {
+//     console.log("req.params= ", req.params)
+//     googleApisService.previewFile(req.params.fileId)
+//     .then((result) => res.status(200).json(result))
+//     .catch((err) => res.status(500).json(err))
+// });
 
 
 
