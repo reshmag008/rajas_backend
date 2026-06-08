@@ -11,20 +11,23 @@ const {roomId} = require('../config/constants')
 async function displayPlayer(player){
     return new Promise(async (resolve, reject) => {
         try {
-            console.log("Emitting current_player to room:", roomId);
+            console.log("Emitting current_player to room: display player", roomId);
 
             if (global?.io) {
                 global.io.to(roomId).emit("current_player",  JSON.stringify(player));
             }
-
+            console.log("player== ", player)
             if(player.id){
                 let selectedPlayer = await models.players.findOne({where : {id : player.id}});
                 selectedPlayer.set({"profile_link" : "1"});
                 await selectedPlayer.save();
+                resolve(selectedPlayer)
+            }else{
+                resolve("No Player ID")
             }
 
 
-            resolve('success')
+            
         }catch(e){
             console.log("error occured in displayPlayer= ", e);
             reject(e);
